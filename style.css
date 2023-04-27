@@ -1,0 +1,27 @@
+.screen {
+  display: block;
+  font-size: 1.5rem;
+  border: solid 1px rgb(187, 187, 250);
+  width: 1000px;
+  height: 100px;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.keyboard {
+  display: block;
+  border: solid 2px rgb(4, 16, 129);
+  width: 1000px;
+  height: 300px;
+  margin: auto;
+}
+
+.main {
+  display: block;
+  border: solid 2px rgb(167, 235, 182);
+  width: 1500px;
+  height: 800px;
+  margin: auto;
+
+}
