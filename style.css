@@ -1,27 +1,26 @@
+.main {
+  display: block;
+  border: solid 2px rgb(167, 235, 182);
+  width: 60%;
+  margin: auto;
+}
+
 .screen {
   display: block;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   border: solid 1px rgb(187, 187, 250);
-  width: 1000px;
-  height: 100px;
+  width: 90%;
+  height: 6rem;
   margin: auto;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 2%;
+  margin-top: 2%;
 }
 
 .keyboard {
   display: block;
   border: solid 2px rgb(4, 16, 129);
-  width: 1000px;
-  height: 300px;
+  width: 90%;
+  height: 20rem;
   margin: auto;
-}
-
-.main {
-  display: block;
-  border: solid 2px rgb(167, 235, 182);
-  width: 1500px;
-  height: 800px;
-  margin: auto;
-
+  margin-bottom: 2%;
 }
