@@ -18,9 +18,27 @@
 
 .keyboard {
   display: block;
+  /* display: flex; */
   border: solid 2px rgb(4, 16, 129);
   width: 90%;
   height: 20rem;
   margin: auto;
   margin-bottom: 2%;
+}
+
+.key {
+  display: inline-block;
+  justify-self: center;
+  border: solid 2px rgb(0, 0, 0);
+  width: 35px;
+  height: 30px;
+  margin: 0.2% 0.2% 0.2% 0.2%;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.clearfix {
+  display: block;
+  width: 100%;
+  clear: both;
 }
