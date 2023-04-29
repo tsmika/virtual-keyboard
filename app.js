@@ -27,7 +27,7 @@ let engKeySet = {
   BracketLeft: "[",
   BracketRight: "]",
   Backslash: "\\",
-  Delete: "Delete",
+  Delete: "Del",
   CapsLock: "CapsLock", // third line
   a: "KeyA",
   s: "KeyS",
@@ -54,11 +54,12 @@ let engKeySet = {
   Period: ".",
   Slash: "/",
   ArrowUp: "▲",
-  ShiftRight: "Shift",
+  ShiftRight: "ShiftRight",
+  ShiftLeft: "ShiftLeft",
   ControlLeft: "Ctrl", // fifth line
-  MetaLeft: "Meta",
+  MetaLeft: "Win",
   AltLeft: "Alt",
-  " ": "           ",
+  Space: "Space",
   AltRight: "Alt",
   ControlRight: "Ctrl",
   ArrowLeft: "◄",
@@ -68,18 +69,9 @@ let engKeySet = {
 
 document.onkeydown = function (event) {
   engKeyboard.push(event.Code + ' : ' + event.key);
- // console.log(engKeyboard);
 }
+
 let engKeyboard = [];
-// let engKeyboard = [192, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 189, 187, 8, 9, 81, 87, 69, 82, 84, 89, 85, 73, 79, 80,
-//   219, 221, 220, 46, 20, 65, 83, 68, 70, 71, 72, 74, 75, 76, 186, 222, 13, 16, 226, 90, 88, 67, 86, 66,
-//   78, 77, 188, 190, 191, 38, 16, 17, 91, 18, 32, 18, 17, 37, 40, 39];
-
-// document.onkeydown = function(event) {
-//   engKeyboard.push(event.keyCode);
-//   console.log(engKeyboard);
-// }
-
 let main = document.createElement('main');
 main.className = 'main';
 document.body.append(main);
@@ -87,50 +79,50 @@ document.body.append(main);
 let screen = document.createElement('textarea');
 screen.className = 'screen';
 screen.onkeydown = function (event) {
-  // screen.style.background = "red";
-  // screen.innerHTML = ':   event.code: ' + event.code + ', event.key: ' + event.key + ', event.keyCode: ' + event.keyCode;
-  console.log(':   event.code: ' + event.code + ', event.key: ' + event.key + ', event.keyCode: ' + event.keyCode);
-  // screen.innerHTML = event.key + ' ';
-  //console.log('code: ' + event.code + ', key: ' + event.key);
   engKeySet[event.key] = event.code;
-  // engKeyboard.push(event.keyCode);
-  // console.log(engKeyboard);
-  console.log(engKeySet);
 }
 
-// screen.setAttribute('type', 'text');
-// screen.innerHTML = '<h1>Test message</h1>';
 main.append(screen);
 
 let keyboard = document.createElement('div');
 keyboard.className = 'keyboard';
 
 let engKeyboardString = '';
-
-// for (let i = 0; i < engKeyboard.length; i++) {
-//   if (i === 14 || i === 29 || i === 42 || i === 56) {
-//     engKeyboardString += '<div class="clearfix"></div>';
-//   }
-//   engKeyboardString += '<div class="key">' + String.fromCharCode(engKeyboard[i]) + '</div>';
-//   // keyboard.append(String.fromCharCode(engKeyboard[i] + ' '));
-// }
-
 let i = 0;
 let title = '';
-for(item in engKeySet){  
-  if (i === 14 || i === 29 || i === 42 || i === 56) {
-    engKeyboardString += '<div class="clearfix"></div>';
+let keySizeClass = '';
+
+for (item in engKeySet) {
+  if (i === 0 || i === 14 || i === 29 || i === 42 || i === 56) {
+    engKeyboardString += '<div class="keyboard-row">';
   }
-  
+
   title = Object.values(engKeySet)[i];
-   if(title[0] === 'K') title = title.at(3);
-  engKeyboardString += '<div class="key">' + title + '</div>';
+
+  if (title[0] === 'K') title = title.at(3);
+
+  switch (title) {
+    case 'Tab':
+    case 'Ctrl': keySizeClass = ' middle-key'; break;
+    case ('ShiftLeft'):
+    case 'Enter': keySizeClass = ' double-key'; break;
+    case 'CapsLock':
+    case 'Backspace': keySizeClass = ' long-key'; break;
+    case 'Space': keySizeClass = ' huge-key'; break;
+    default: keySizeClass = '';
+  }
+
+  if (title[0] + title[1] === 'Sh') title = 'Shift';
+
+  engKeyboardString += '<div class="key' + keySizeClass + '">' + title + '</div>';
+
+  if (i === 13 || i === 28 || i === 41 || i === 55 || i === 64) {
+    engKeyboardString += '</div>';
+  }
 
   i++;
 }
-// console.log(engKeyboardString);
 
 keyboard.innerHTML = engKeyboardString;
-// document.querySelector('#keyboard1').innerHTML  = "<h1>some txt</h1>";
 
 main.append(keyboard);
