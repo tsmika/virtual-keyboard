@@ -25,6 +25,7 @@
   margin-bottom: 2%;
   margin-top: 2%;
 }
+
 .screen:active {
   border-color: rgb(41, 71, 117);
 }
@@ -32,11 +33,10 @@
 .keyboard {
   display: block;
   width: 90%;
-  height: 14.5rem;
   margin: auto;
-  padding: 0% 1% 0% 1%;
+  padding: 0.5% 0.5% 0.5% 0.5%;
   border-radius: 5px;
-  background-color:  rgb(41, 71, 117);
+  background-color: rgb(41, 71, 117);
 }
 
 .keyboard-row {
@@ -45,13 +45,10 @@
 }
 
 .key {
-  display: inline-block;
-  justify-self: center;
   width: 2em;
-  height: 30px;
-  margin: 0.8% 0.4% 0.4% 0.4%;
+  height: 1.5em;
+  margin: 0.6% 0.6% 0.6% 0.6%;
   text-align: center;
-  font-size: 1.15rem;
   background-color: rgb(67, 117, 161);
   padding-top: 1%;
   border-radius: 4px;
@@ -59,31 +56,48 @@
   font-family: 'Arial';
   font-style: normal;
   font-weight: 400;
-  font-size: 1.2em;
+  font-size: 1.25em;
   line-height: 20px;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
-.middle-key{
+.key:active {
+  border-radius: 0.6em;
+  background-color: rgba(198, 201, 19, 0.986);
+}
+
+.key:hover {
+  background-color: rgba(198, 201, 19, 0.986);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.middle-key {
   width: 3em;
 }
 
-.double-key{
+.double-key {
   width: 4em;
 }
 
-.long-key{
+.long-key {
   width: 5em;
 }
 
-.huge-key{
+.huge-key {
   width: 15em;
   color: rgb(67, 117, 161);
 }
 
-.key:hover{
-  background-color: rgb(80, 140, 192);
-  cursor: pointer;
+
+
+.huge-key:hover {
+  color: rgba(198, 201, 19, 0.986);
 }
-.huge-key:hover{
-  color: rgb(80, 140, 192);
+
+.huge-key:active {
+  color: rgba(198, 201, 19, 0.986);
 }
