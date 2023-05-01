@@ -1,0 +1,116 @@
+@font-face {
+  font-family: 'Arial';
+  src: url('ArialMT.eot');
+  src: local('Arial'), local('ArialMT'),
+    url('ArialMT.eot?#iefix') format('embedded-opentype'),
+    url('ArialMT.woff') format('woff'),
+    url('ArialMT.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.main {
+  display: block;
+  width: 40%;
+  margin: auto;
+}
+
+.screen {
+  display: block;
+  font-size: 1.2rem;
+  border: solid 1px rgb(41, 71, 117);
+  width: 91%;
+  height: 14rem;
+  margin: auto;
+  margin-bottom: 2%;
+  margin-top: 2%;
+  white-space: pre-line;
+}
+
+.screen:active {
+  border-color: rgb(41, 71, 117);
+}
+
+.keyboard {
+  display: block;
+  width: 90%;
+  margin: auto;
+  padding: 0.5% 0.5% 0.5% 0.5%;
+  border-radius: 5px;
+  background-color: rgb(41, 71, 117);
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.key {
+  width: 2em;
+  height: 1.5em;
+  margin: 0.6% 0.6% 0.6% 0.6%;
+  text-align: center;
+  background-color: rgb(67, 117, 161);
+  padding-top: 1%;
+  border-radius: 4px;
+  color: rgb(235, 243, 250);
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.25em;
+  line-height: 20px;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.key:active {
+  border-radius: 0.6em;
+  background-color: rgba(198, 201, 19, 0.986);
+}
+
+.pressed {
+  border-radius: 0.6em;
+  background-color: rgba(150, 179, 150, 0.986);
+}
+
+.huge-key.pressed {
+  color: rgba(150, 179, 150, 0.986);
+  /* animation-duration:1s;
+  animation-fill-mode:forwards; */
+
+}
+
+.key:hover {
+  background-color: rgba(198, 201, 19, 0.986);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.middle-key {
+  width: 3em;
+}
+
+.double-key {
+  width: 4em;
+}
+
+.long-key {
+  width: 5em;
+}
+
+.huge-key {
+  width: 15em;
+  color: rgb(67, 117, 161);
+}
+
+
+
+.huge-key:hover {
+  color: rgba(198, 201, 19, 0.986);
+}
+
+.huge-key:active {
+  color: rgba(198, 201, 19, 0.986);
+}
