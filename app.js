@@ -67,7 +67,6 @@ let engKeySet = {
 };
 
 document.onkeydown = function (event) {
-  // engKeyboard.push(event.Code + ' : ' + event.key);
   console.log(event.code + ' : ' + event.key);
 }
 
@@ -78,9 +77,6 @@ document.body.append(main);
 
 let screen = document.createElement('textarea');
 screen.className = 'screen';
-// screen.onkeydown = function (event) {
-//   engKeySet[event.key] = event.code;
-// }
 
 main.append(screen);
 
@@ -104,7 +100,6 @@ for (item in engKeySet) {
 
   switch (title) {
     case 'Backquote': title = '\`'; break;
-    case 'Space': keySizeClass = ' huge-key'; break;
     case 'Backspace': keySizeClass = ' long-key'; break;
     case 'CapsLock': title = 'CapsLock'; keySizeClass = ' long-key'; break;
     case 'ControlLeft': title = 'Ctrl'; keySizeClass = ' middle-key'; break;
@@ -126,16 +121,15 @@ for (item in engKeySet) {
     case 'ArrowUp': title = '▲'; break;
     case 'ShiftRight': title = 'Shift'; break;
     case 'MetaLeft': title = 'Win'; break;
-    case 'AltLeft': title = 'Alt'; break;
-    case 'AltRight': title = 'Alt';
-    case 'ControlRight':  title = 'Ctrl'; keySizeClass = ''; break;
-    case 'ArrowLeft': title = '◄'; break;
-    case 'ArrowDown': title = '▼'; break;
-    case 'ArrowRight': title = '►'; break;
-    default: keySizeClass = '';
+    case 'AltLeft': title = 'Alt'; keySizeClass = ''; break;
+    case 'Space': keySizeClass = ' huge-key'; break;
+    case 'AltRight': title = 'Alt'; keySizeClass = ''; break;
+    case 'ControlRight': title = 'Ctrl'; keySizeClass = ' middle-key'; break;
+    case 'ArrowLeft': title = '◄'; keySizeClass = ''; break;
+    case 'ArrowDown': title = '▼'; keySizeClass = ''; break;
+    case 'ArrowRight': title = '►'; keySizeClass = ''; break;
+    default: keySizeClass = ''; break;
   }
-
-  // if (title[0] + title[1] === 'Sh') title = 'Shift';
 
   engKeyboardString += '<div class="key' + keySizeClass + '">' + title + '</div>';
 
@@ -160,23 +154,35 @@ for (let k of key) {
     content = k.textContent;
     console.log(content);
     let screenContent = scr.textContent;
-    console.log("screenContent:" + screenContent);
+    let cursorPosition = getCaretPos();
+
     if (k.textContent === 'Backspace') {
-      scr.textContent = screenContent.slice(0, screenContent.length - 1);
-      console.log("screenContent.slice")
+      scr.textContent = screenContent.slice(0, scr.selectionStart - 1) + screenContent.slice(scr.selectionStart, screenContent.length);
+      scr.selectionStart = cursorPosition - 1;
+    } else if (k.textContent === 'Tab') {
+      scr.textContent = screenContent + '    ';
+      scr.focus();
+    } else if (k.textContent === 'Del') {
+      scr.textContent = screenContent.slice(0, scr.selectionStart) + screenContent.slice(scr.selectionStart + 1, screenContent.length);
+      scr.selectionStart = cursorPosition;
+
     } else {
-      scr.textContent = screenContent + k.textContent;
+      scr.textContent = screenContent.slice(0, scr.selectionStart) + k.textContent + screenContent.slice(scr.selectionStart, screenContent.length);
+      scr.selectionStart = cursorPosition + 1;
     }
   }
 }
 
 
-// document.onkeydown = function(event){
-//   document.querySelector('keyboard .key')
-//   document.ge
-// }
-
-// clear.onclick = function(evt){
-//   evt.preventDefault();
-//   scr.textContent = '';
-// }
+function getCaretPos() {
+  scr.focus();
+  if (document.selection) {
+    let selection = document.selection.createRange();
+    let duplicate = selection.duplicate();
+    selection.collapse(true);
+    duplicate.moveToElementText(scr);
+    duplicate.setEndPoint('EndToEnd', selection);
+    return duplicate.text.length;
+  } else if (scr.selectionStart !== false) return scr.selectionStart;
+  else return 0;
+}
