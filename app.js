@@ -66,10 +66,6 @@ let engKeySet = {
   ArrowRight: "ArrowRight",
 };
 
-document.onkeydown = function (event) {
-  console.log(event.code + ' : ' + event.key);
-}
-
 let engKeyboard = [];
 let main = document.createElement('main');
 main.className = 'main';
@@ -95,7 +91,8 @@ for (item in engKeySet) {
 
   title = Object.keys(engKeySet)[i];
 
-  if (title[0] === 'K') title = title.at(3);
+
+  if (title[0] === 'K') title = title.at(3).toLowerCase();
   if (title[0] + title[1] === 'Di') title = title.at(5);
 
   switch (title) {
@@ -131,7 +128,7 @@ for (item in engKeySet) {
     default: keySizeClass = ''; break;
   }
 
-  engKeyboardString += '<div class="key' + keySizeClass + '">' + title + '</div>';
+  engKeyboardString += '<div class="key' + keySizeClass + '" data="' + item + '">' + title + '</div>';
 
   if (i === 13 || i === 28 || i === 41 || i === 55 || i === 64) {
     engKeyboardString += '</div>';
@@ -144,35 +141,55 @@ keyboard.innerHTML = engKeyboardString;
 
 main.append(keyboard);
 
-let key = document.querySelectorAll('.key');
+let keys = document.querySelectorAll('.key');
 let scr = document.querySelector('.screen');
-let clear = document.querySelector('.clear');
+let globalContent = scr.textContent;
 let content = '';
 
-for (let k of key) {
+for (let k of keys) {
   k.onclick = function () {
     content = k.textContent;
-    console.log(content);
     let screenContent = scr.textContent;
+    console.log(content);
+    console.log(screenContent);
     let cursorPosition = getCaretPos();
 
     if (k.textContent === 'Backspace') {
       scr.textContent = screenContent.slice(0, scr.selectionStart - 1) + screenContent.slice(scr.selectionStart, screenContent.length);
       scr.selectionStart = cursorPosition - 1;
     } else if (k.textContent === 'Tab') {
-      scr.textContent = screenContent + '    ';
+      scr.textContent = screenContent.slice(0, scr.selectionStart) + '    ' + screenContent.slice(scr.selectionStart, screenContent.length);
       scr.focus();
+      scr.selectionStart = cursorPosition + 4;
     } else if (k.textContent === 'Del') {
       scr.textContent = screenContent.slice(0, scr.selectionStart) + screenContent.slice(scr.selectionStart + 1, screenContent.length);
       scr.selectionStart = cursorPosition;
-
+    } else if (k.textContent === 'Enter') {
+      scr.textContent = screenContent.slice(0, scr.selectionStart) + '\n' + screenContent.slice(scr.selectionStart, screenContent.length);
+      scr.selectionStart = scr.textContent.length;
     } else {
       scr.textContent = screenContent.slice(0, scr.selectionStart) + k.textContent + screenContent.slice(scr.selectionStart, screenContent.length);
       scr.selectionStart = cursorPosition + 1;
     }
+
+    console.log("globalContent: " + document.querySelector('.screen').textContent);
+
   }
 }
 
+document.onkeydown = function (event) {
+
+
+  document.querySelectorAll('.key').forEach(function (element) {
+    element.classList.remove('pressed');
+  });
+
+  document.querySelector('.key[data="' + event.code + '"]').classList.add('pressed');
+  setTimeout(removePressing, 100);
+  function removePressing() {
+    document.querySelector('.key[data="' + event.code + '"]').classList.remove('pressed');
+  }
+}
 
 function getCaretPos() {
   scr.focus();

@@ -24,6 +24,7 @@
   margin: auto;
   margin-bottom: 2%;
   margin-top: 2%;
+  white-space: pre-line;
 }
 
 .screen:active {
@@ -67,6 +68,18 @@
 .key:active {
   border-radius: 0.6em;
   background-color: rgba(198, 201, 19, 0.986);
+}
+
+.pressed {
+  border-radius: 0.6em;
+  background-color: rgba(150, 179, 150, 0.986);
+}
+
+.huge-key.pressed {
+  color: rgba(150, 179, 150, 0.986);
+  /* animation-duration:1s;
+  animation-fill-mode:forwards; */
+
 }
 
 .key:hover {
