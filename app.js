@@ -78,7 +78,6 @@ main.append(screen);
 
 let keyboard = document.createElement('div');
 keyboard.className = 'keyboard';
-
 let engKeyboardString = '';
 let i = 0;
 let title = '';
@@ -91,7 +90,7 @@ for (item in engKeySet) {
 
   title = Object.keys(engKeySet)[i];
 
-
+  
   if (title[0] === 'K') title = title.at(3).toLowerCase();
   if (title[0] + title[1] === 'Di') title = title.at(5);
 
@@ -203,3 +202,8 @@ function getCaretPos() {
   } else if (scr.selectionStart !== false) return scr.selectionStart;
   else return 0;
 }
+
+
+let info = document.createElement('div');
+info.innerHTML = '<h2 style="display: block; width:35%; margin: auto;  margin-top: 2%;">Клавиатура создана в операционной системе Windows</h2>';
+document.body.append(info);
